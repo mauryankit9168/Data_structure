@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        set<vector<int>> uniq;
+
+        for (int mask = 0; mask < (1 << n); mask++) {
+            vector<int> subset;
+            for (int i = 0; i < n; i++)
+                if (mask & (1 << i))
+                    subset.push_back(nums[i]);
+            uniq.insert(subset);
+        }
+
+        return vector<vector<int>>(uniq.begin(), uniq.end());
+    }
+};
